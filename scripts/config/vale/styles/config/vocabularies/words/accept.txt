@@ -2,6 +2,7 @@
 Bitwarden
 bot
 Cognito
+Config
 Cyber
 Dependabot
 draw.io
