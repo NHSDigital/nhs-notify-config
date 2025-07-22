@@ -1,8 +1,8 @@
 [A-Z]+s
 Bitwarden
 bot
+[Cc]onfig
 Cognito
-Config
 Cyber
 Dependabot
 draw.io

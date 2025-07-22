@@ -1,7 +1,7 @@
 export { Audit, $Audit } from './audit';
 export { Client, $Client } from './client';
 export { Campaign, $Campaign } from './campaign';
-export { FeatureFlag, $FeatureFlag } from './featureFlags';
+export { FeatureFlag, $FeatureFlag } from './featureFlag';
 export { MeshMailbox } from './meshMailbox';
 export { GovuknotifyAccount } from './govuknotifyAccount';
 export { Queue } from './queue';

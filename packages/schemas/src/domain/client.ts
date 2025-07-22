@@ -1,14 +1,14 @@
 import { z } from 'zod';
+import { idRef } from 'zod-mermaid';
 import { $MeshMailbox } from './meshMailbox';
 import { $ApimApplication } from './apimApplication';
-import { $Campaign } from './campaign';
 import { $SuppressionFilter } from './suppressionFilter';
 import { $GovuknotifyAccount } from './govuknotifyAccount';
-import { $ClientSubscription } from './clientSubscription';
 import { $ClientQuota } from './clientQuota';
+import { ConfigBase } from './common';
+import { $FeatureFlag } from './featureFlag';
 
-export const $Client = z.object({
-  id: z.string(),
+export const $Client = ConfigBase('Client').extend({
   name: z.string(),
   senderOdsCode: z.string().optional(),
   quota: $ClientQuota.optional(),
@@ -16,12 +16,9 @@ export const $Client = z.object({
   apimApplication: $ApimApplication,
   govuknotifyAccount: $GovuknotifyAccount,
 
-  featureFlags: z.array(z.string()),
+  featureFlags: z.array(idRef($FeatureFlag)),
   rfrCodes: z.array(z.string()),
   suppressionFilters: z.array($SuppressionFilter),
-
-  campaigns: z.array($Campaign),
-  subscriptions: z.array($ClientSubscription),
-});
+}).describe('Client');
 
 export type Client = z.infer<typeof $Client>;

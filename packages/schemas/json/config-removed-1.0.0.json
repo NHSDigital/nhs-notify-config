@@ -1,56 +1,21 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
+  "additionalProperties": false,
   "properties": {
-    "dataschema": {
-      "type": "string",
-      "enum": [
-        "https://notify.nhs.uk/events/schemas/config-removed/v1.json"
-      ]
-    },
-    "dataschemaversion": {
-      "type": "string",
-      "const": "1.0.0"
-    },
-    "type": {
-      "type": "string",
-      "const": "uk.nhs.notify.config.ConfigRemoved.v1"
-    },
-    "id": {
-      "type": "string"
-    },
-    "source": {
-      "type": "string"
-    },
-    "specversion": {
-      "type": "string",
-      "const": "1.0"
-    },
-    "subject": {
-      "type": "string"
-    },
-    "time": {
-      "type": "string"
-    },
-    "datacontenttype": {
-      "type": "string",
-      "const": "application/json"
-    },
-    "plane": {
-      "type": "string",
-      "const": "control"
-    },
     "data": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
         "configType": {
-          "type": "string",
           "enum": [
             "client",
+            "campaign",
+            "client-subscription",
             "channel-supplier",
             "supplier-quota",
-            "feature-flag"
-          ]
+            "feature-flag",
+            "specification"
+          ],
+          "type": "string"
         },
         "id": {
           "type": "string"
@@ -60,7 +25,43 @@
         "configType",
         "id"
       ],
-      "additionalProperties": false
+      "type": "object"
+    },
+    "datacontenttype": {
+      "const": "application/json",
+      "type": "string"
+    },
+    "dataschema": {
+      "pattern": "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/schemas\\/config-removed-1.\\d+\\.\\d+\\.json$",
+      "type": "string"
+    },
+    "dataschemaversion": {
+      "pattern": "^1\\.\\d+\\.\\d+$",
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "plane": {
+      "const": "control",
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "specversion": {
+      "const": "1.0",
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "time": {
+      "type": "string"
+    },
+    "type": {
+      "const": "uk.nhs.notify.config.ConfigRemoved",
+      "type": "string"
     }
   },
   "required": [
@@ -76,5 +77,5 @@
     "plane",
     "data"
   ],
-  "additionalProperties": false
+  "type": "object"
 }
