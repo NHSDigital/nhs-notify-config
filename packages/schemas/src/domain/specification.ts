@@ -1,5 +1,25 @@
 import { z } from 'zod';
 import { $Version, ConfigBase } from './common';
+import { idRef } from 'zod-mermaid';
+import { $Layout } from './layout';
+
+export const $SpecificationFeature = z.enum(['SAME_DAY', 'BRAILLE', 'AUDIO_CD', 'MAILMARK']);
+export const $EnvelopeFeature = z.enum(['WHITEMAIL', 'NHS_BRANDING', 'NHS_BARCODE']);
+
+export const $Envelope = ConfigBase('Envelope').extend({
+  name: z.string(),
+  size: z.enum(['C5', 'C4', 'DL']),
+  features: z.array($EnvelopeFeature).optional(),
+}).describe('Envelope');
+export type Envelope = z.infer<typeof $Envelope>;
+
+export const $Insert = ConfigBase('Insert').extend({
+  name: z.string(),
+  type: z.enum(['FLYER', 'BOOKLET']),
+  source: z.enum(['IN_HOUSE', 'EXTERNAL']),
+  artwork: z.url().optional()
+}).describe('Insert');
+export type Insert = z.infer<typeof $Insert>;
 
 export const $Specification = ConfigBase('Specification').extend({
   name: z.string(),
@@ -7,6 +27,33 @@ export const $Specification = ConfigBase('Specification').extend({
   createdAt: z.date(),
   updatedAt: z.date(),
   version: $Version,
+  layout: idRef($Layout),
+  billing: z.object({
+    basePrice: z.number(),
+    unitPrice: z.number(),
+  }).partial().optional(),
+  postage: z.object({
+    tariff: z.string(),
+    size: z.string(),
+    deliverySLA: z.number(),
+    maxPages: z.number(),
+    maxWeight: z.number().optional(),
+    maxThickness: z.number().optional(),
+  }),
+  supplierSpec: z.object({
+    envelope: idRef($Envelope),
+    printColour: z.enum(['BLACK', 'COLOUR']),
+    paperColour: z.string().optional(),
+    insert: idRef($Insert).optional(),
+    features: z.array($SpecificationFeature).optional(),
+    additional: z.record(z.string(), z.string()).optional()
+  })
 }).describe('Specification');
-
 export type Specification = z.infer<typeof $Specification>;
+
+export const $SpecificationGroup = ConfigBase('SpecificationGroup').extend({
+  name: z.string(),
+  description: z.string().optional(),
+  specifications: z.array(idRef($Specification)).nonempty(),
+}).describe('SpecificationGroup');
+export type SpecificationGroup = z.infer<typeof $SpecificationGroup>;

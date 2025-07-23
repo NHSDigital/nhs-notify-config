@@ -141,6 +141,36 @@ erDiagram
         date createdAt
         date updatedAt
         string version
+        string layout "ref: Layout"
+        Billing billing
+        Postage postage
+        SupplierSpec supplierSpec
+    }
+    Billing {
+        number basePrice
+        number unitPrice
+    }
+    Postage {
+        string tariff
+        string size
+        number deliverySLA
+        number maxPages
+        number maxWeight
+        number maxThickness
+    }
+    SupplierSpec {
+        string envelope "ref: Envelope"
+        string printColour "enum: BLACK, COLOUR"
+        string paperColour
+        string insert "ref: Insert"
+        string[] features "enum: SAME_DAY, BRAILLE, AUDIO_CD, MAILMARK"
+        Record additional "&lt;string, string&gt;"
+    }
+    Envelope {
+    }
+    Insert {
+    }
+    Layout {
     }
     Data_specification-supplier {
         SpecificationSupplier record
@@ -175,6 +205,12 @@ erDiagram
     SupplierQuota ||--o{ Schedule : "schedule"
     Data_feature-flag ||--|| FeatureFlag : "record"
     Data_specification ||--|| Specification : "record"
+    Specification }o--|| Layout : "layout"
+    Specification ||--o{ Billing : "billing"
+    Specification ||--|| Postage : "postage"
+    Specification ||--|| SupplierSpec : "supplierSpec"
+    SupplierSpec }o--|| Envelope : "envelope"
+    SupplierSpec }o--o{ Insert : "insert"
     Data_specification-supplier ||--|| SpecificationSupplier : "record"
     SpecificationSupplier }o--|| Specification : "specificationId"
     SpecificationSupplier }o--|| ChannelSupplier : "supplierId"

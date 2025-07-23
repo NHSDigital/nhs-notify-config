@@ -5,8 +5,9 @@ import { generateMermaidDiagram } from 'zod-mermaid';
 import packageJson from '../../package.json';
 import { $Campaign, $ChannelSupplier, $Client, $FeatureFlag, $SupplierQuota } from '../domain';
 import { $Queue } from '../domain/queue';
-import { $Specification } from '../domain/specification';
+import { $Envelope, $Insert, $Specification, $SpecificationGroup } from '../domain/specification';
 import { $SpecificationSupplier } from '../domain/specificationSupplier';
+import { $Layout } from '../domain/layout';
 
 const version = packageJson.version;
 
@@ -51,7 +52,7 @@ ${mermaid}
 {
   const file = `mermaid/specification-domain-model-${version}.md`;
   const mermaid = generateMermaidDiagram([
-    $Specification,
+    $Specification, $Envelope, $Layout, $Insert, $SpecificationGroup
   ], { diagramType: 'er' });
   fs.writeFileSync(file, `# Specification Config Domain Model Entities
 
