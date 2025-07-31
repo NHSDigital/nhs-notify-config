@@ -12,6 +12,7 @@ export const $Envelope = ConfigBase('Envelope').extend({
   features: z.array($EnvelopeFeature).optional(),
 }).describe('Envelope');
 export type Envelope = z.infer<typeof $Envelope>;
+export type EnvelopeId = Envelope['id'];
 
 export const $Insert = ConfigBase('Insert').extend({
   name: z.string(),
@@ -20,6 +21,7 @@ export const $Insert = ConfigBase('Insert').extend({
   artwork: z.url().optional()
 }).describe('Insert');
 export type Insert = z.infer<typeof $Insert>;
+export type InsertId = Insert['id'];
 
 export const $Specification = ConfigBase('Specification').extend({
   name: z.string(),
@@ -36,11 +38,11 @@ export const $Specification = ConfigBase('Specification').extend({
     tariff: z.string(),
     size: z.string(),
     deliverySLA: z.number(),
-    maxPages: z.number(),
+    maxSheets: z.number(),
     maxWeight: z.number().optional(),
     maxThickness: z.number().optional(),
   }),
-  supplierSpec: z.object({
+  pack: z.object({
     envelope: idRef($Envelope),
     printColour: z.enum(['BLACK', 'COLOUR']),
     paperColour: z.string().optional(),
@@ -50,6 +52,7 @@ export const $Specification = ConfigBase('Specification').extend({
   })
 }).describe('Specification');
 export type Specification = z.infer<typeof $Specification>;
+export type SpecificationId = Specification['id'];
 
 export const $SpecificationGroup = ConfigBase('SpecificationGroup').extend({
   name: z.string(),

@@ -12,3 +12,4 @@ export const $Layout = ConfigBase('Layout').extend({
 }).describe('Layout');
 
 export type Layout = z.infer<typeof $Layout>;
+export type LayoutId = Layout['id'];

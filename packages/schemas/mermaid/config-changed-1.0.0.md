@@ -144,7 +144,7 @@ erDiagram
         string layout "ref: Layout"
         Billing billing
         Postage postage
-        SupplierSpec supplierSpec
+        Pack pack
     }
     Billing {
         number basePrice
@@ -158,7 +158,7 @@ erDiagram
         number maxWeight
         number maxThickness
     }
-    SupplierSpec {
+    Pack {
         string envelope "ref: Envelope"
         string printColour "enum: BLACK, COLOUR"
         string paperColour
@@ -208,9 +208,9 @@ erDiagram
     Specification }o--|| Layout : "layout"
     Specification ||--o{ Billing : "billing"
     Specification ||--|| Postage : "postage"
-    Specification ||--|| SupplierSpec : "supplierSpec"
-    SupplierSpec }o--|| Envelope : "envelope"
-    SupplierSpec }o--o{ Insert : "insert"
+    Specification ||--|| Pack : "pack"
+    Pack }o--|| Envelope : "envelope"
+    Pack }o--o{ Insert : "insert"
     Data_specification-supplier ||--|| SpecificationSupplier : "record"
     SpecificationSupplier }o--|| Specification : "specificationId"
     SpecificationSupplier }o--|| ChannelSupplier : "supplierId"
