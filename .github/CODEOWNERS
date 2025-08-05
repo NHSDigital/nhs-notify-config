@@ -1,7 +1,7 @@
 # NHS Notify Code Owners
 
 # Notify default owners
-*                           @NHSDigital/nhs-notify-admins
+*                           @NHSDigital/nhs-notify-config
 
 /.github/                   @NHSDigital/nhs-notify-admins
 *.code-workspace            @NHSDigital/nhs-notify-admins
@@ -13,8 +13,6 @@
 
 
 # Each NHS Notify repository should have clear code owners set.
-# Do not use GitHub team names, instead use the GitHub usernames
-# of the people who are responsible for the code maintenance.
 
 # This is a comment.
 # Each line is a file pattern followed by one or more owners.
