@@ -1,8 +1,10 @@
+auditability
+auditable
 [A-Z]+s
 Bitwarden
 bot
+[Cc]onfig
 Cognito
-Config
 Cyber
 Dependabot
 draw.io
@@ -17,7 +19,7 @@ idempotence
 Jira
 OAuth
 Octokit
-onboarding
+[Oo]nboarding
 Podman
 Python
 rawContent
