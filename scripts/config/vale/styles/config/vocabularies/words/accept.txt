@@ -1,3 +1,5 @@
+auditability
+auditable
 [A-Z]+s
 Bitwarden
 bot
@@ -17,7 +19,7 @@ idempotence
 Jira
 OAuth
 Octokit
-onboarding
+[Oo]nboarding
 Podman
 Python
 rawContent
