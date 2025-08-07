@@ -3,7 +3,7 @@ import { $Client } from './client';
 import { $ChannelSupplier } from './channelSupplier';
 import { $SupplierQuota } from './supplierQuota';
 import { $Queue } from './queue';
-import { $FeatureFlag } from './featureFlags';
+import { $FeatureFlag } from './featureFlag';
 import { $RoutingConfig } from './routing';
 
 export const $Audit = z.object({

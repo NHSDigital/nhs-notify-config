@@ -1,9 +1,9 @@
 import { z } from 'zod';
+import { ConfigBase } from './common';
 
-export const $ApimApplication = z.object({
+export const $ApimApplication = ConfigBase('ApimApplication').extend({
   id: z.string(),
-  clientId: z.string(),
   apimId: z.string(),
-});
+}).describe('ApimApplication');
 
 export type ApimApplication = z.infer<typeof $ApimApplication>;

@@ -34,58 +34,6 @@
                   ],
                   "type": "object"
                 },
-                "campaigns": {
-                  "items": {
-                    "additionalProperties": false,
-                    "properties": {
-                      "clientId": {
-                        "type": "string"
-                      },
-                      "default": {
-                        "type": "boolean"
-                      },
-                      "govuknotifyAccount": {
-                        "additionalProperties": false,
-                        "properties": {
-                          "clientId": {
-                            "type": "string"
-                          },
-                          "default": {
-                            "type": "boolean"
-                          },
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "name",
-                          "clientId",
-                          "default"
-                        ],
-                        "type": "object"
-                      },
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "name",
-                      "clientId",
-                      "default",
-                      "govuknotifyAccount"
-                    ],
-                    "type": "object"
-                  },
-                  "type": "array"
-                },
                 "featureFlags": {
                   "items": {
                     "type": "string"
@@ -180,41 +128,6 @@
                 "senderOdsCode": {
                   "type": "string"
                 },
-                "subscriptions": {
-                  "items": {
-                    "additionalProperties": false,
-                    "properties": {
-                      "callbackSecretId": {
-                        "description": "ID of callback secret in config domain",
-                        "type": "string"
-                      },
-                      "callbackUrl": {
-                        "type": "string"
-                      },
-                      "clientId": {
-                        "type": "string"
-                      },
-                      "id": {
-                        "type": "string"
-                      },
-                      "subscribedEvents": {
-                        "items": {
-                          "type": "string"
-                        },
-                        "type": "array"
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "clientId",
-                      "callbackUrl",
-                      "callbackSecretId",
-                      "subscribedEvents"
-                    ],
-                    "type": "object"
-                  },
-                  "type": "array"
-                },
                 "suppressionFilters": {
                   "items": {
                     "additionalProperties": false,
@@ -247,9 +160,116 @@
                 "govuknotifyAccount",
                 "featureFlags",
                 "rfrCodes",
-                "suppressionFilters",
-                "campaigns",
-                "subscriptions"
+                "suppressionFilters"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "configType",
+            "record"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "configType": {
+              "const": "campaign",
+              "type": "string"
+            },
+            "record": {
+              "additionalProperties": false,
+              "properties": {
+                "clientId": {
+                  "type": "string"
+                },
+                "default": {
+                  "type": "boolean"
+                },
+                "govuknotifyAccount": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "clientId": {
+                      "type": "string"
+                    },
+                    "default": {
+                      "type": "boolean"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name",
+                    "clientId",
+                    "default"
+                  ],
+                  "type": "object"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "clientId",
+                "default",
+                "govuknotifyAccount"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "configType",
+            "record"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "configType": {
+              "const": "client-subscription",
+              "type": "string"
+            },
+            "record": {
+              "additionalProperties": false,
+              "properties": {
+                "callbackSecretId": {
+                  "description": "ID of callback secret in config domain",
+                  "type": "string"
+                },
+                "callbackUrl": {
+                  "type": "string"
+                },
+                "clientId": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "subscribedEvents": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "id",
+                "clientId",
+                "callbackUrl",
+                "callbackSecretId",
+                "subscribedEvents"
               ],
               "type": "object"
             }
@@ -433,6 +453,36 @@
             "record"
           ],
           "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "configType": {
+              "const": "specification",
+              "type": "string"
+            },
+            "record": {
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "name"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "configType",
+            "record"
+          ],
+          "type": "object"
         }
       ]
     },
@@ -441,13 +491,11 @@
       "type": "string"
     },
     "dataschema": {
-      "enum": [
-        "https://notify.nhs.uk/events/schemas/config-changed/v1.json"
-      ],
+      "pattern": "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/schemas\\/config-changed-1.\\d+\\.\\d+\\.json$",
       "type": "string"
     },
     "dataschemaversion": {
-      "const": "1.0.0",
+      "pattern": "^1\\.\\d+\\.\\d+$",
       "type": "string"
     },
     "id": {
@@ -471,7 +519,7 @@
       "type": "string"
     },
     "type": {
-      "const": "uk.nhs.notify.config.ConfigChanged.v1",
+      "const": "uk.nhs.notify.config.ConfigChanged",
       "type": "string"
     }
   },

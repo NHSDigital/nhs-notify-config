@@ -3,24 +3,29 @@
   "dependencies": {
     "zod": "^4.0.5"
   },
-  "description": "",
+  "description": "Schemas for NHS Notify configuration",
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "^22.13.4",
+    "jest": "^30.0.4",
+    "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "zod-mermaid": "^1.0.4"
   },
   "main": "src/index.ts",
   "name": "@nhsdigital/nhs-notify-config-schemas",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "repository": "git@github.com:NHSDigital/nhs-notify-web-template-management.git",
+  "repository": "git@github.com:NHSDigital/nhs-notify-config.git",
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/index.ts",
     "json": "ts-node src/cli/generate-json.ts",
+    "mermaid": "ts-node src/cli/generate-mermaid.ts",
     "start": "node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "version": "1.0.0"
 }
